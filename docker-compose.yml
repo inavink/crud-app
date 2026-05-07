@@ -10,8 +10,6 @@ services:
       MYSQL_DATABASE: crud_app
     volumes:
       - db_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
 
   backend:
     build:
@@ -30,8 +28,6 @@ services:
       JWT_EXPIRES_IN: 1h
     depends_on:
       - db
-    ports:
-      - "4000:4000"
 
   frontend:
     build:
@@ -39,8 +35,6 @@ services:
       dockerfile: Dockerfile
     container_name: crud_app_frontend
     restart: unless-stopped
-    environment:
-      VITE_BACKEND_URL: http://localhost:4000/api
     depends_on:
       - backend
     ports:

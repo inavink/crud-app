@@ -31,6 +31,16 @@ npm install
 npm run dev
 ```
 
+> If you run the frontend on a public EC2 host, expose the Vite server on `0.0.0.0` and set the backend base URL to your EC2 public IP.
+>
+> Example:
+> ```bash
+> export VITE_BACKEND_URL=http://<EC2_PUBLIC_IP>:4000/api
+> npm run dev
+> ```
+>
+> Then open `http://<EC2_PUBLIC_IP>:5173` in your browser.
+
 ## Default Environment
 Use the following database connection values in `backend/.env`:
 
