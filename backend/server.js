@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import db from "./db.js";
 import authRoutes from "./routes/auth.js";
 import itemsRoutes from "./routes/items.js";
+import adminRoutes from "./routes/admin.js";
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/items", itemsRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.get("/", (req, res) => {
   res.send({ message: "CRUD API is running." });
@@ -26,6 +28,7 @@ async function initDatabase() {
         id INT AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(100) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
+        role ENUM('user', 'admin') DEFAULT 'user',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);

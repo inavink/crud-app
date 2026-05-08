@@ -9,6 +9,24 @@ This workspace contains a full-stack CRUD application with:
 - User registration and login
 - JWT-based authentication
 - CRUD operations on user-specific items
+- Admin panel to manage all users and items
+
+## Admin Panel
+
+An admin can:
+- View all users and items in the system
+- Delete users and items
+- Change user roles (user ↔ admin)
+- Access the admin panel from the dashboard if they have admin privileges
+
+### Setting up an admin user
+
+1. Register a new user via the frontend
+2. Use MySQL to promote the user to admin:
+   ```sql
+   UPDATE users SET role = 'admin' WHERE username = 'your_username';
+   ```
+3. Log in with the admin account and you'll see an "Admin Panel" button on the dashboard
 
 ## Setup
 

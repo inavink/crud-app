@@ -16,6 +16,7 @@ export default function Login({ onAuth }) {
       const data = await loginUser({ username, password });
       localStorage.setItem("token", data.token);
       localStorage.setItem("username", data.username);
+      localStorage.setItem("userRole", data.role);
       onAuth();
       navigate("/dashboard");
     } catch (err) {

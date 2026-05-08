@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { fetchItems, createItem, updateItem, deleteItem } from "../api";
 
 export default function Dashboard({ onLogout }) {
@@ -7,6 +8,8 @@ export default function Dashboard({ onLogout }) {
   const [description, setDescription] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const userRole = localStorage.getItem("userRole");
 
   const loadItems = async () => {
     try {
@@ -62,7 +65,12 @@ export default function Dashboard({ onLogout }) {
           <h1>My Items</h1>
           <p>Manage your items with create, update, and delete operations.</p>
         </div>
-        <button className="logout-button" onClick={onLogout}>Log out</button>
+        <div className="header-actions">
+          {userRole === "admin" && (
+            <button className="admin-button" onClick={() => navigate("/admin")}>Admin Panel</button>
+          )}
+          <button className="logout-button" onClick={onLogout}>Log out</button>
+        </div>
       </header>
 
       <section className="item-form-card">

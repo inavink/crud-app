@@ -38,7 +38,7 @@ router.post("/login", async (req, res) => {
   }
 
   try {
-    const [rows] = await db.query("SELECT id, password FROM users WHERE username = ?", [username]);
+    const [rows] = await db.query("SELECT id, password, role FROM users WHERE username = ?", [username]);
     const user = rows[0];
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials." });
@@ -49,11 +49,11 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials." });
     }
 
-    const token = jwt.sign({ id: user.id, username }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user.id, username, role: user.role }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN || "1h",
     });
 
-    return res.json({ token, username });
+    return res.json({ token, username, role: user.role });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Login failed." });
