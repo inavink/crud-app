@@ -6,7 +6,7 @@ services:
     container_name: crud_app_db
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: Navin070526
       MYSQL_DATABASE: crud_app
     volumes:
       - db_data:/var/lib/mysql
@@ -22,7 +22,7 @@ services:
     environment:
       DB_HOST: db
       DB_USER: root
-      DB_PASSWORD: rootpassword
+      DB_PASSWORD: Navin070526
       DB_NAME: crud_app
       JWT_SECRET: change_this_secret
       JWT_EXPIRES_IN: 1h
